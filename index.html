@@ -9,6 +9,23 @@
 body { margin: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
+
+/* tagline red pen + keycap links */
+.circled { position: relative; white-space: nowrap; }
+.circled svg { position: absolute; left: -7%; top: -32%; width: 114%; height: 164%; overflow: visible; fill: none; stroke: var(--pen); stroke-width: 2.2; stroke-linecap: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+.pen { justify-self: start; font-family: var(--hand); font-size: 1.2rem; font-weight: 700; color: var(--pen); transform: rotate(-3deg); margin-left: 1.5rem; }
+.keys { display: flex; flex-wrap: wrap; gap: 0.9rem; padding-bottom: 6px; }
+.key { display: grid; justify-items: center; gap: 0.35rem; width: 5.2rem; padding: 0.7rem 0.4rem 0.55rem; background: var(--paper); color: var(--ink); border: 2px solid var(--ink); border-radius: 10px; box-shadow: 0 5px 0 var(--ink); text-decoration: none; font: 500 0.78rem var(--mono); cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.key:hover, .key:focus-visible { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+.key:active { transform: translateY(5px); box-shadow: 0 0 0 var(--ink); }
+.key:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.key.pink { background: var(--sticker-bg); color: var(--sticker-ink); border-color: var(--sticker-ink); box-shadow: 0 5px 0 var(--sticker-ink); }
+.key.pink:hover, .key.pink:focus-visible { box-shadow: 0 2px 0 var(--sticker-ink); }
+.key .icon { width: 1.65rem; height: 1.65rem; image-rendering: pixelated; }
+.addr { user-select: all; }
+.dl-row { display: flex; align-items: center; gap: 0.75rem; }
+.dl-row a { font-family: var(--mono); font-size: 0.8rem; }
+@media (prefers-reduced-motion: reduce) { .key, .key:hover, .key:active { transition: none; transform: none; } }
 </style>
 <title>Ananya's Lab Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,18 +49,19 @@ img { max-width: 100%; }
   --sticker-ink: #1b1218;
   --sticker-edge: #ffffff;
   --pink-text: #c2316b;
+  --pen: #c92a2a;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #121513; --ink: #e7ebe7; --muted: #9aa39c; --rule: #2a302c;
     --grid: rgba(231, 235, 231, 0.035); --accent: #5fcf82; --accent-soft: #19301f;
-    --warn: #e7b25c; --warn-soft: #33270f; --pink-text: #ff8fb8; color-scheme: dark;
+    --warn: #e7b25c; --warn-soft: #33270f; --pink-text: #ff8fb8; --pen: #ff8a80; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121513; --ink: #e7ebe7; --muted: #9aa39c; --rule: #2a302c;
   --grid: rgba(231, 235, 231, 0.035); --accent: #5fcf82; --accent-soft: #19301f;
-  --warn: #e7b25c; --warn-soft: #33270f; --pink-text: #ff8fb8; color-scheme: dark;
+  --warn: #e7b25c; --warn-soft: #33270f; --pink-text: #ff8fb8; --pen: #ff8a80; color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -266,17 +284,18 @@ html { scroll-behavior: smooth; }
       <div class="photo"><img src="ananya.png" alt="Ananya Dubey, smiling, in a black blazer"></div>
       <div class="intro-text">
         <h1>Ananya Dubey<span>.</span></h1>
-        <p class="sticker">just a girl asking AI to show its work.</p>
+        <p class="sticker">just a girl asking AI to <span class="circled">show its work<svg viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M5 17 C 6 5, 90 1, 96 13 C 100 25, 14 31, 5 19 C 2 13, 16 6, 30 5"/></svg></span>.</p>
+        <p class="pen">...and checking the math &#10003;</p>
       </div>
     </div>
     <p class="position">Building AI that knows what it doesn't know, and tools that help me figure out what I don't.</p>
-    <div class="links">
-      <a href="https://github.com/Ananya1464" target="_blank" rel="noopener">github.com/Ananya1464</a>
-      <a href="https://www.linkedin.com/in/ananya-dubey-953a07265/" target="_blank" rel="noopener">LinkedIn</a>
-      <button type="button" class="linkish" id="open-resume">resume</button>
-      <a href="resume.pdf" download>download PDF</a>
-      <span class="email">ananya14626@gmail.com</span>
+    <div class="keys" aria-label="Find me">
+      <a class="key" href="https://github.com/Ananya1464" target="_blank" rel="noopener"><canvas class="icon" data-icon="code" width="11" height="11" aria-hidden="true"></canvas><span>github</span></a>
+      <a class="key" href="https://www.linkedin.com/in/ananya-dubey-953a07265/" target="_blank" rel="noopener"><canvas class="icon" data-icon="person" width="11" height="11" aria-hidden="true"></canvas><span>linkedin</span></a>
+      <button type="button" class="key" id="open-resume"><canvas class="icon" data-icon="page" width="11" height="11" aria-hidden="true"></canvas><span>resume</span></button>
+      <a class="key pink" href="mailto:ananya14626@gmail.com"><canvas class="icon" data-icon="mail" width="11" height="11" aria-hidden="true"></canvas><span>email</span></a>
     </div>
+    <p class="mono addr">ananya14626@gmail.com</p>
     <nav class="jump" aria-label="Sections">
       <a href="#research">research →</a>
       <a href="#engineering">engineering →</a>
@@ -603,11 +622,25 @@ html { scroll-behavior: smooth; }
 </div>
 
 <dialog class="resume-dlg" id="resume-dlg" aria-label="Resume">
-  <div class="resume-top"><span class="mono">Ananya Dubey · resume</span><button type="button" id="close-resume">close ×</button></div>
+  <div class="resume-top"><span class="mono">Ananya Dubey · resume</span><span class="dl-row"><a href="resume.pdf" download>download PDF</a><button type="button" id="close-resume">close ×</button></span></div>
   <img src="resume-1.png" alt="Ananya Dubey's one-page resume: summary, technical skills, experience at ValueMomentum and Nuvanaah, projects, and education at VESIT.">
 </dialog>
 
 <script>
+(function () {
+  var I = {
+    code: [[3,2],[2,3],[1,4],[0,5],[1,6],[2,7],[3,8],[7,2],[8,3],[9,4],[10,5],[9,6],[8,7],[7,8],[6,2],[6,3],[5,4],[5,5],[5,6],[4,7],[4,8]],
+    person: [[4,0],[5,0],[6,0],[3,1],[4,1],[5,1],[6,1],[7,1],[3,2],[4,2],[5,2],[6,2],[7,2],[4,3],[5,3],[6,3],[3,6],[4,6],[5,6],[6,6],[7,6],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],[1,8],[2,8],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[9,9]],
+    page: [[2,0],[3,0],[4,0],[5,0],[6,0],[7,1],[8,2],[6,1],[6,2],[7,2],[2,1],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[8,3],[8,4],[8,5],[8,6],[8,7],[8,8],[8,9],[8,10],[3,10],[4,10],[5,10],[6,10],[7,10],[4,4],[5,4],[6,4],[4,6],[5,6],[6,6],[4,8],[5,8]],
+    mail: [[0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[10,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[10,3],[10,4],[10,5],[10,6],[10,7],[10,8],[0,9],[1,9],[2,9],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[9,9],[10,9],[1,3],[2,4],[3,5],[4,6],[5,7],[6,6],[7,5],[8,4],[9,3]]
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('canvas.icon'), function (cv) {
+    var pts = I[cv.dataset.icon]; if (!pts) return;
+    var ctx = cv.getContext('2d');
+    ctx.fillStyle = getComputedStyle(cv.parentElement).color;
+    pts.forEach(function (p) { ctx.fillRect(p[0], p[1], 1, 1); });
+  });
+})();
 (function () {
   var dlg = document.getElementById('resume-dlg');
   document.getElementById('open-resume').addEventListener('click', function () { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
