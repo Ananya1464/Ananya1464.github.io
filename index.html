@@ -389,9 +389,9 @@ html { scroll-behavior: smooth; }
       <div class="when"><span class="mono">Jun 2026</span><span class="chip warn">small benchmark</span></div>
       <div class="body">
         <h3>Prompt injection detection</h3>
-        <p class="q">Can a simple classifier spot prompt injections, and what gives them away?</p>
-        <p>A 110-prompt benchmark across 7 attack categories. I compared a plain TF-IDF classifier with one trained on Cohere embeddings, using 5-fold cross-validation, and looked at which phrases separate attacks from normal prompts.</p>
-        <p class="stack">Cohere embed-v4 · scikit-learn · <a href="https://github.com/Ananya1464/prompt-injection-detection" target="_blank" rel="noopener">repo</a></p>
+        <p class="q">Can a simple classifier spot prompt injections, and what breaks it?</p>
+        <p>Trained a TF-IDF and a MiniLM-embedding classifier on the public deepset/prompt-injections dataset (79.3% / 82.8% clean accuracy), then measured how often each one's catches evade detection after intent-preserving rewording. Casing, spacing and synonym swaps fooled neither model — unicode homoglyphs did (66.7% TF-IDF evasion, 48.8% MiniLM), and a benign-framing wrapper broke TF-IDF (61.1%) but not MiniLM (0%), the clearest evidence yet that embeddings generalize past surface wording where n-grams don't.</p>
+        <p class="stack">sentence-transformers (MiniLM) · scikit-learn · <a href="https://github.com/Ananya1464/prompt-injection-detection" target="_blank" rel="noopener">repo</a></p>
       </div>
     </article>
   </section>
